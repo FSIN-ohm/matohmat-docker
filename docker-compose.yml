@@ -1,0 +1,16 @@
+version: "2.1"
+
+services:
+  server:
+    build: Server
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:8080:8080"
+  db:
+    build: Database
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ${PWD}/data:/var/lib/mysql
+
