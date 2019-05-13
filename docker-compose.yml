@@ -14,10 +14,12 @@ services:
       - DB_PWD=password_here
       - DEVICE_KEYS=device_keys.txt
       - ORIGINS=http://localhost:8080::null
+    restart: always
   db:
     build: Database
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - ${PWD}/data:/var/lib/mysql
+    restart: always
 

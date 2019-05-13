@@ -5,4 +5,4 @@ RUN cd /home; \
 
 COPY device_keys.txt /home/device_keys.txt
 
-CMD sleep 30; cd /home; java -jar /home/server.jar $DB_HOST $DB_SCHEMA $DB_USER $DB_PWD $DEVICE_KEYS $ORIGINS
+CMD sleep 5; cd /home; java -jar /home/server.jar $DB_HOST $DB_SCHEMA $DB_USER $DB_PWD $DEVICE_KEYS $ORIGINS
