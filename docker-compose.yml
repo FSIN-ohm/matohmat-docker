@@ -7,6 +7,13 @@ services:
       - db
     ports:
       - "127.0.0.1:8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_SCHEMA=matohmat
+      - DB_USER=matomat_system
+      - DB_PWD=password_here
+      - DEVICE_KEYS=device_keys.txt
+      - ORIGINS=http://localhost:8080::null
   db:
     build: Database
     environment:
