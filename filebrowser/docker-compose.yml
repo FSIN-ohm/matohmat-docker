@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+    filebrowser:
+        image: filebrowser/filebrowser:v2.0.12
+        ports:
+            - "8081:80"
+        volumes:
+            - ./data:/srv
+            - ./filebrowser.json:/.filebrowser.json
+            - ./db:/db
