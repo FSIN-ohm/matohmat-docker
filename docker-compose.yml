@@ -1,12 +1,20 @@
 version: "2.1"
 
 services:
+  proxy:
+    image: nginx:1.15.12
+    ports:
+       - "127.0.0.1:8080:8080"
+    volumes:
+      - "./proxy:/etc/nginx/conf.d"
+    restart: always
+    depends_on:
+      - matohmat
+      - filebrowser
   matohmat:
     build: Server
     depends_on:
       - db
-    ports:
-      - "127.0.0.1:8080:8080"
     environment:
       - DB_HOST=db
       - DB_SCHEMA=matohmat
@@ -14,18 +22,17 @@ services:
       - DB_PWD=password_here
       - DEVICE_KEYS=device_keys.txt
       - ORIGINS=http://localhost:8080::null
+      - CONTEXT_PATH=/api
     restart: always
   db:
     build: Database
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - ${PWD}/data:/var/lib/mysql
+      - ./data:/var/lib/mysql
     restart: always
   filebrowser:
     image: filebrowser/filebrowser:v2.0.12
-    ports:
-      - "127.0.0.1:8081:80"
     volumes:
       - ./filebrowser/data:/srv
       - ./filebrowser/filebrowser.json:/.filebrowser.json
