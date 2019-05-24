@@ -35,6 +35,6 @@ services:
     image: filebrowser/filebrowser:v2.0.12
     volumes:
       - ./filebrowser/data:/srv
-      - ./filebrowser/filebrowser.json:/.filebrowser.json
+      - $PWD/filebrowser/filebrowser.json:/.filebrowser.json
       - ./filebrowser/db:/db
 
