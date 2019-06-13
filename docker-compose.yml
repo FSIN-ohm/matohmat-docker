@@ -16,14 +16,12 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_SCHEMA=matohmat
-      - DB_USER=matomat_system
-      - DB_PWD=password_here
-      - DEVICE_KEYS=device_keys.txt
-      - ORIGINS=http://localhost:8080::null
-      - CONTEXT_PATH=/api
+      - PARAM=
+      - CONFIG_FILE=server.conf
     restart: always
+    volumes:
+      - ./Server/device_keys.txt:/home/device_keys.txt
+      - ./Server/server.conf:/home/server.conf
   db:
     build: Database
     environment:
