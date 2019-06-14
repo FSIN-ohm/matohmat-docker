@@ -1,18 +1,20 @@
 version: "2.1"
 
 services:
-  proxy:
+  server:
     image: nginx:1.15.12
     ports:
        - "127.0.0.1:8080:8080"
     volumes:
-      - "./proxy:/etc/nginx/conf.d"
+      - ./server:/etc/nginx/conf.d
+      - ./html:/usr/share/nginx/html:ro
     restart: always
     depends_on:
-      - matohmat
       - filebrowser
   matohmat:
-    build: Server
+    build: matohmat
+    ports:
+      - "127.0.0.1:8081:8080"
     depends_on:
       - db
     environment:
@@ -20,8 +22,8 @@ services:
       - CONFIG_FILE=server.conf
     restart: always
     volumes:
-      - ./Server/device_keys.txt:/home/device_keys.txt
-      - ./Server/server.conf:/home/server.conf
+      - ./matohmat/device_keys.txt:/home/device_keys.txt
+      - ./matohmat/server.conf:/home/server.conf
   db:
     build: Database
     environment:
