@@ -14,6 +14,7 @@ services:
     volumes:
       - ./matohmat/device_keys.txt:/home/device_keys.txt
       - ./matohmat/server.conf:/home/server.conf
+      - ./matohmat/mail_template.txt:/home/mail_template.txt
   db:
     build: Database
     environment:
